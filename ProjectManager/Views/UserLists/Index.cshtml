@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProjectManager.Models.UserList>
+
+@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "View Users";
+}
+
+<h2>View Users</h2>
+
+<p>
+    @Html.ActionLink("Add User", "Create")
+</p>
+@using (Html.BeginForm("Index", "UserLists", FormMethod.Get))
+{
+    <p>
+        Search (FIrst_Name/ Last_Name): @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("First_Name", "Index", new { sortOrder = ViewBag.First_Name, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Last_Name", "Index", new { sortOrder = ViewBag.Last_Name, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Employee_ID", "Index", new { sortOrder = ViewBag.Employee_ID, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Project", "Index", new { sortOrder = ViewBag.Project, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Task", "Index", new { sortOrder = ViewBag.Task, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Last_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectList.Project)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskList.Task)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.User_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.User_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.User_ID })
+            </td>
+        </tr>
+    }
+
+</table>

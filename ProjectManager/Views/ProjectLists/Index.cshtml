@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjectManager.Models.ProjectList>
+
+@{
+    ViewBag.Title = "View Projects";
+}
+
+<h2>View Projects</h2>
+
+<p>
+    @Html.ActionLink("Add Project", "Create")
+</p>
+@using (Html.BeginForm("Index", "ProjectLists", FormMethod.Get))
+{
+    <p>
+        Search Project: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Project", "Index", new { sortOrder = ViewBag.Project, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Start_Date", "Index", new { sortOrder = ViewBag.Start_Date, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("End_Date", "Index", new { sortOrder = ViewBag.End_Date, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Priority", "Index", new { sortOrder = ViewBag.Priority, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Project_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Project_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Project_ID })
+            </td>
+        </tr>
+    }
+
+</table>

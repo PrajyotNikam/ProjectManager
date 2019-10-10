@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ProjectManager.Models.TaskList>
+
+@{
+    ViewBag.Title = "View Tasks";
+}
+
+<h2>View Tasks</h2>
+
+<p>
+    @Html.ActionLink("Add Task", "Create")
+</p>
+@using (Html.BeginForm("Index", "TaskLists", FormMethod.Get))
+{
+    <p>
+        Search (Task/ Parent_Task/ Project): @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Task", "Index", new { sortOrder = ViewBag.Task, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Start_Date", "Index", new { sortOrder = ViewBag.Start_Date, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("End_Date", "Index", new { sortOrder = ViewBag.End_Date, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Priority", "Index", new { sortOrder = ViewBag.Priority, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Active", "Index", new { sortOrder = ViewBag.Active, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Parent_Task", "Index", new { sortOrder = ViewBag.Parent_Task, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th>
+            @Html.ActionLink("Project", "Index", new { sortOrder = ViewBag.Project, currentFilter = ViewBag.CurrentSort })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentTask.Parent_Task)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectList.Project)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Task_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Task_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Task_ID })
+            </td>
+        </tr>
+    }
+
+</table>

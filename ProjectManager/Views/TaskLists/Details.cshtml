@@ -1,0 +1,74 @@
+﻿@model ProjectManager.Models.TaskList
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TaskList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Task)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentTask.Parent_Task)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentTask.Parent_Task)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectList.Project)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectList.Project)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Task_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
